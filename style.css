@@ -1,0 +1,136 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Poppins", Sans-serif;
+    background: #4C8A7B;
+    padding: 32px 0;
+}
+.container {
+    max-width: 1510px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+
+
+
+
+/* Form Style */
+.employee-search-form {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 30px 30px 20px;
+}
+.employee-form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.form-fields-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+
+
+.qualifications {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+#selected_qualifications {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.qual-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border: 1.5px solid #639922;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #3B6D11;
+    background: transparent;
+    font-weight: 500;
+}
+
+.qual-tag button {
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    color: #639922;
+    border: none;
+    background: none;
+    padding: 0;
+    margin-left: 2px;
+}
+
+.qual-tag button:hover {
+    color: #3B6D11;
+}
+
+.qualification-selector {
+    position: relative;
+}
+
+.qualification-add-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 14px;
+    background: #639922;
+    border: none;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+}
+
+.qualification-add-btn:hover {
+    background: #3B6D11;
+}
+
+.qualification-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    background: #fff;
+    border: 0.5px solid #ccc;
+    border-radius: 8px;
+    min-width: 160px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    list-style: none;
+    padding: 4px 0;
+    margin: 0;
+}
+
+.qualification-dropdown li {
+    padding: 8px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    color: #333;
+}
+
+.qualification-dropdown li:hover {
+    background: #f5f5f5;
+}
+
+.qualification-dropdown .empty {
+    padding: 8px 14px;
+    font-size: 13px;
+    color: #999;
+    font-style: italic;
+    cursor: default;
+}

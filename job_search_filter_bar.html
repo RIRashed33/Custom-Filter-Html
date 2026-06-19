@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    
+
+    <div class="container">
+        <form class="employee-search-form">
+            <div class="employee-form-content">
+                <div class="form-fields-row">
+                    <div class="single-field">
+                        <label>
+                            <span>Location</span>
+                            <input type="text" name="location" placeholder="location">
+                        </label>
+                    </div>
+                    <div class="single-field">
+                        <label>
+                            <span>Travel radius</span>
+                            <select name="travel_radius">
+                                <option value="" selected disabled>Travel radius</option>
+                                <option value="Option 1">Option 1</option>
+                                <option value="Option 2">Option 2</option>
+                                <option value="Option 3">Option 3</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="single-field">
+                        <label>
+                            <span>Industry</span>
+                            <select name="industry">
+                                <option value="" selected disabled>Industry</option>
+                                <option value="Option 1">Option 1</option>
+                                <option value="Option 2">Option 2</option>
+                                <option value="Option 3">Option 3</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="single-field">
+                        <label>
+                            <span>Experience</span>
+                            <select name="experience">
+                                <option value="" selected disabled>Experience</option>
+                                <option value="Option 1">Option 1</option>
+                                <option value="Option 2">Option 2</option>
+                                <option value="Option 3">Option 3</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="single-field">
+                        <label>
+                            <span>Availability</span>
+                            <select name="availability">
+                                <option value="" selected disabled>Availability</option>
+                                <option value="Option 1">Option 1</option>
+                                <option value="Option 2">Option 2</option>
+                                <option value="Option 3">Option 3</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+        
+                <div class="radio-fields-submit">
+                    <div class="single-radio-field">
+                        <span>Employment type:</span>
+                        <label class="radio-opt"><input type="radio" name="employee_type" value="Full Time">Full Time</label>
+                        <label class="radio-opt"><input type="radio" name="employee_type" value="Part Time">Part Time</label>
+                        <label class="radio-opt"><input type="radio" name="employee_type" value="Casual">Casual</label>
+                    </div>
+                    <div class="single-radio-field">
+                        <span>Qualifications:</span>
+                        <div class="qualifications">
+                            <div id="selected_qualifications"></div>
+                            <div class="qualification-selector">
+                                <button class="qualification-add-btn" id="qualification_add_btn" aria-haspopup="listbox" aria-expanded="false" type="button">Add <i class="ti ti-plus" aria-hidden="true"></i></button>
+                                <ul class="qualification-dropdown" id="qualification_dropdown" style="display: none" role="listbox" aria-label="Select qualification">
+                                    <li>RSA</li>
+                                    <li>Vehicle</li>
+                                    <li>First Aid</li>
+                                    <li>Forklift</li>
+                                    <li>White Card</li>
+                                    <li>Food Handling</li>
+                                    <li>Security Licence</li>
+                                    <li>HR Licence</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="single-radio-field form-submit-btn">
+                        <button class="form-submit-btn" type="submit">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+
+const dropdown = document.getElementById('qualification_dropdown');
+const addBtn = document.getElementById('qualification_add_btn');
+const selectedContainer = document.getElementById('selected_qualifications');
+
+// Read all qualifications from the existing <li> elements
+const ALL_QUALS = Array.from(dropdown.querySelectorAll('li')).map(li => li.textContent.trim());
+let selected = [];
+let open = false;
+
+function render() {
+    selectedContainer.innerHTML = '';
+    selected.forEach(q => {
+        const tag = document.createElement('span');
+        tag.className = 'qual-tag';
+        tag.innerHTML = `${q} <button aria-label="Remove ${q}" data-q="${q}">&times;</button>`;
+        selectedContainer.appendChild(tag);
+    });
+
+    const remaining = ALL_QUALS.filter(q => !selected.includes(q));
+    dropdown.innerHTML = '';
+    if (remaining.length === 0) {
+        dropdown.innerHTML = '<li class="empty">No more options</li>';
+    } else {
+        remaining.forEach(q => {
+            const li = document.createElement('li');
+            li.setAttribute('role', 'option');
+            li.textContent = q;
+            li.addEventListener('click', () => {
+                selected.push(q);
+                closeDropdown();
+                render();
+            });
+            dropdown.appendChild(li);
+        });
+    }
+}
+
+function closeDropdown() {
+    open = false;
+    dropdown.style.display = 'none';
+    addBtn.setAttribute('aria-expanded', 'false');
+}
+
+addBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    open = !open;
+    dropdown.style.display = open ? 'block' : 'none';
+    addBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+
+document.addEventListener('click', () => closeDropdown());
+dropdown.addEventListener('click', e => e.stopPropagation());
+
+selectedContainer.addEventListener('click', e => {
+    const btn = e.target.closest('button');
+    if (btn) {
+        selected = selected.filter(s => s !== btn.dataset.q);
+        render();
+    }
+});
+
+render();
+
+    </script>
+
+
+</body>
+</html>
