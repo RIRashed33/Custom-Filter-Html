@@ -72,16 +72,18 @@
                 <div class="radio-fields-submit">
                     <div class="single-radio-field">
                         <span>Employment type:</span>
-                        <label class="radio-opt"><input type="radio" name="employee_type" value="Full Time">Full Time</label>
-                        <label class="radio-opt"><input type="radio" name="employee_type" value="Part Time">Part Time</label>
-                        <label class="radio-opt"><input type="radio" name="employee_type" value="Casual">Casual</label>
+                        <div class="filed-group">
+                            <label><input type="radio" name="employee_type" value="Full Time">Full Time</label>
+                            <label><input type="radio" name="employee_type" value="Part Time">Part Time</label>
+                            <label><input type="radio" name="employee_type" value="Casual">Casual</label>
+                        </div>
                     </div>
-                    <div class="single-radio-field">
+                    <div class="single-radio-field qualifications-field">
                         <span>Qualifications:</span>
                         <div class="qualifications">
                             <div id="selected_qualifications"></div>
                             <div class="qualification-selector">
-                                <button class="qualification-add-btn" id="qualification_add_btn" aria-haspopup="listbox" aria-expanded="false" type="button">Add <i class="ti ti-plus" aria-hidden="true"></i></button>
+                                <button class="qualification-add-btn" id="qualification_add_btn" aria-haspopup="listbox" aria-expanded="false" type="button">Add</button>
                                 <ul class="qualification-dropdown" id="qualification_dropdown" style="display: none" role="listbox" aria-label="Select qualification">
                                     <li>RSA</li>
                                     <li>Vehicle</li>
@@ -95,7 +97,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="single-radio-field form-submit-btn">
+                    <div class="single-radio-field form-submit">
                         <button class="form-submit-btn" type="submit">Search</button>
                     </div>
                 </div>
@@ -104,72 +106,71 @@
     </div>
 
     <script>
+        const dropdown = document.getElementById('qualification_dropdown');
+        const addBtn = document.getElementById('qualification_add_btn');
+        const selectedContainer = document.getElementById('selected_qualifications');
 
-const dropdown = document.getElementById('qualification_dropdown');
-const addBtn = document.getElementById('qualification_add_btn');
-const selectedContainer = document.getElementById('selected_qualifications');
+        // Read all qualifications from the existing <li> elements
+        const ALL_QUALS = Array.from(dropdown.querySelectorAll('li')).map(li => li.textContent.trim());
+        let selected = [];
+        let open = false;
 
-// Read all qualifications from the existing <li> elements
-const ALL_QUALS = Array.from(dropdown.querySelectorAll('li')).map(li => li.textContent.trim());
-let selected = [];
-let open = false;
-
-function render() {
-    selectedContainer.innerHTML = '';
-    selected.forEach(q => {
-        const tag = document.createElement('span');
-        tag.className = 'qual-tag';
-        tag.innerHTML = `${q} <button aria-label="Remove ${q}" data-q="${q}">&times;</button>`;
-        selectedContainer.appendChild(tag);
-    });
-
-    const remaining = ALL_QUALS.filter(q => !selected.includes(q));
-    dropdown.innerHTML = '';
-    if (remaining.length === 0) {
-        dropdown.innerHTML = '<li class="empty">No more options</li>';
-    } else {
-        remaining.forEach(q => {
-            const li = document.createElement('li');
-            li.setAttribute('role', 'option');
-            li.textContent = q;
-            li.addEventListener('click', () => {
-                selected.push(q);
-                closeDropdown();
-                render();
+        function render() {
+            selectedContainer.innerHTML = '';
+            selected.forEach(qualification => {
+                const tag = document.createElement('button');
+                tag.innerHTML = qualification;
+                tag.type = 'button';
+                tag.dataset.qualification = qualification;
+                tag.name = 'qualifications[]';
+                tag.value = qualification;
+                selectedContainer.appendChild(tag);
             });
-            dropdown.appendChild(li);
+
+            const remaining = ALL_QUALS.filter(qualification => !selected.includes(qualification));
+            dropdown.innerHTML = '';
+            if (remaining.length === 0) {
+                dropdown.innerHTML = '<li class="empty">No more options</li>';
+            } else {
+                remaining.forEach(qualification => {
+                    const li = document.createElement('li');
+                    li.setAttribute('role', 'option');
+                    li.textContent = qualification;
+                    li.addEventListener('click', () => {
+                        selected.push(qualification);
+                        closeDropdown();
+                        render();
+                    });
+                    dropdown.appendChild(li);
+                });
+            }
+        }
+
+        function closeDropdown() {
+            open = false;
+            dropdown.style.display = 'none';
+            addBtn.setAttribute('aria-expanded', 'false');
+        }
+
+        addBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            open = !open;
+            dropdown.style.display = open ? 'block' : 'none';
+            addBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
         });
-    }
-}
 
-function closeDropdown() {
-    open = false;
-    dropdown.style.display = 'none';
-    addBtn.setAttribute('aria-expanded', 'false');
-}
+        document.addEventListener('click', () => closeDropdown());
+        dropdown.addEventListener('click', e => e.stopPropagation());
 
-addBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    open = !open;
-    dropdown.style.display = open ? 'block' : 'none';
-    addBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-});
+        selectedContainer.addEventListener('click', e => {
+            const btn = e.target.closest('button[data-qualification]');
+            if (btn) {
+                selected = selected.filter(s => s !== btn.dataset.qualification);
+                render();
+            }
+        });
 
-document.addEventListener('click', () => closeDropdown());
-dropdown.addEventListener('click', e => e.stopPropagation());
-
-selectedContainer.addEventListener('click', e => {
-    const btn = e.target.closest('button');
-    if (btn) {
-        selected = selected.filter(s => s !== btn.dataset.q);
         render();
-    }
-});
-
-render();
-
     </script>
-
-
 </body>
 </html>

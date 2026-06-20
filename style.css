@@ -24,83 +24,153 @@ body {
     border-radius: 16px;
     padding: 30px 30px 20px;
 }
+.employee-search-form * {
+    font-family: "Poppins", Sans-serif;
+}
 .employee-form-content {
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
-.form-fields-row {
+.form-fields-row, .radio-fields-submit {
     display: flex;
     align-items: flex-start;
     gap: 20px;
 }
-
-
-
-.qualifications {
+.single-field label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.single-field label span, .single-radio-field span {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 600;
+    color: #111111;
+}
+.single-field {
+    flex: 1;
+}
+.single-field input, .single-field select {
+    border: 1px solid #00000036;
+    border-radius: 8px;
+    color: #111111;
+    line-height: 1.5;
+    font-size: 14px;
+    padding: 8px 14px;
+    outline: none;
+}
+.radio-fields-submit {
+    align-items: center;
+    gap: 80px;
+}
+.single-radio-field, .filed-group {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 24px;
+}
+.single-radio-field.qualifications-field {
+    flex: 1;
+}
+.single-radio-field.form-submit {
+    flex: 0 0 auto;
+    justify-content: flex-end;
+}
+.single-radio-field label {
     display: flex;
     align-items: center;
     gap: 8px;
-    flex-wrap: wrap;
 }
-
-#selected_qualifications {
+.single-radio-field label input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 2px solid #000000;
+    border-radius: 50%;
+    transition: all 150ms;
+}
+.single-radio-field label input[type="radio"]:checked {
+    border-width: 5px;
+}
+.qualification-add-btn {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+    padding: 8px 45px 8px 20px;
+    background: #718900;
+    border: none;
+    border-radius: 40px;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: all 200ms;
+    position: relative;
+}
+.qualification-add-btn::before, .qualification-add-btn::after {
+    content: '';
+    display: block;
+    width: 13px;
+    height: 2px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    position: absolute;
+    right: 22px;
+    top: calc(50% - 1px);
+}
+.qualification-add-btn::after {
+    transform: rotate(90deg);
+}
+.qualification-add-btn:hover {
+    background: #566900;
+}
+.qualifications, #selected_qualifications {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
+}
+#selected_qualifications {
     flex-wrap: wrap;
 }
-
-.qual-tag {
-    display: inline-flex;
+#selected_qualifications button {
+    background-color: #71890008;
+    border: 1px solid #718900;
+    border-radius: 40px;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+    color: #000000;
+    padding: 7px 45px 7px 17px;
+    display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 4px 10px;
-    border: 1.5px solid #639922;
-    border-radius: 20px;
-    font-size: 12px;
-    color: #3B6D11;
-    background: transparent;
-    font-weight: 500;
+    gap: 8px;
+    transition: all 200ms;
+    position: relative;
 }
-
-.qual-tag button {
-    cursor: pointer;
-    font-size: 14px;
-    line-height: 1;
-    color: #639922;
-    border: none;
-    background: none;
-    padding: 0;
-    margin-left: 2px;
+#selected_qualifications button:hover {
+    background-color: #70890040;
 }
-
-.qual-tag button:hover {
-    color: #3B6D11;
+#selected_qualifications button::before, #selected_qualifications button::after {
+    content: '';
+    display: block;
+    width: 14px;
+    height: 2px;
+    background-color: #000000;
+    border-radius: 2px;
+    position: absolute;
+    right: 20px;
+    top: calc(50% - 1px);
 }
-
+#selected_qualifications button::before {
+    transform: rotate(-45deg);
+}
+#selected_qualifications button::after {
+    transform: rotate(45deg);
+}
 .qualification-selector {
     position: relative;
 }
-
-.qualification-add-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    padding: 5px 14px;
-    background: #639922;
-    border: none;
-    border-radius: 20px;
-    font-size: 13px;
-    font-weight: 500;
-    color: #fff;
-    cursor: pointer;
-}
-
-.qualification-add-btn:hover {
-    background: #3B6D11;
-}
-
 .qualification-dropdown {
     position: absolute;
     top: calc(100% + 6px);
@@ -122,15 +192,91 @@ body {
     cursor: pointer;
     color: #333;
 }
-
 .qualification-dropdown li:hover {
     background: #f5f5f5;
 }
-
 .qualification-dropdown .empty {
     padding: 8px 14px;
     font-size: 13px;
     color: #999;
     font-style: italic;
     cursor: default;
+}
+.form-submit .form-submit-btn {
+    outline: none;
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.5;
+    border-radius: 18px;
+    padding: 18px 40px;
+    background-color: #E7C164;
+    color: #ffffff;
+    transition: all 200ms;
+}
+.form-submit .form-submit-btn:hover {
+    background-color: #b6943e;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1499px) {
+    .radio-fields-submit {
+        gap: 24px;
+    }
+    .single-radio-field, .filed-group {
+        gap: 12px;
+    }
+    .single-radio-field label {
+        gap: 4px;
+    }
+}
+@media screen and (max-width: 1199px) {
+    .single-radio-field {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .single-radio-field > span {
+        flex: 1 1 100%;
+    }
+    .single-radio-field {
+        row-gap: 8px;
+    }
+    .qualifications {
+        flex-direction: row-reverse;
+    }
+    .filed-group {
+        flex-wrap: wrap;
+        row-gap: 4px;
+    }
+
+}
+@media screen and (max-width: 991px) {
+    .employee-search-form {
+        border-radius: 12px;
+        padding: 24px 20px 20px;
+    }
+    .form-fields-row, .radio-fields-submit {
+        flex-direction: column;
+    }
+    .single-field {
+        width: 100%;
+    }
+    .single-radio-field {
+        width: 100%;
+    }
+    .qualifications {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+    }
+    .form-submit .form-submit-btn {
+        font-size: 16px;
+        padding: 16px 40px;
+    }
 }
