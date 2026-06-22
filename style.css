@@ -222,6 +222,11 @@ body {
 /* Form Style */
 
 /* Form Results Style */
+.filter-results-content {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
 .filter-results-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -248,10 +253,11 @@ body {
     align-items: center;
     gap: 16px;
 }
-.employee-img {
+.employee-img, .employee-badge {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 0 0 auto;
 }
 .employee-img img {
     width: 60px;
@@ -260,6 +266,159 @@ body {
     object-position: center;
     border-radius: 50%;
 }
+.employee-title h3 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1;
+    font-weight: 500;
+    color: #000000;
+}
+.employee-title {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+.employee-title h6 {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 400;
+    color: #0000009C;
+}
+.employee-badge {
+    width: 42px;
+    height: 42px;
+    border: 1px solid #E7C164;
+    border-radius: 50%;
+    background: #FFFFFF;
+    text-align: center;
+}
+.employee-badge svg {
+    width: 12px;
+    color: #E7C164;
+}
+.employee-availability {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.employee-availability span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background-color: #ffffff;
+    padding: 8px 10px 8px 8px;
+    border-radius: 100px;
+    font-size: 12px;
+    line-height: 1.15;
+    color: #000000;
+}
+.employee-availability span svg {
+    width: 12px;
+    height: 12px;
+}
+.employee-card-footer {
+    padding: 16px 23px 23px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.experience-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.experience-details .single-info {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    justify-content: space-between;
+}
+.experience-details .single-info p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    font-weight: 500;
+    color: #111111;
+}
+.qualification-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.qualification-list span {
+    display: inline-block;
+    border: 1px solid #718900;
+    padding: 3px 6px;
+    background-color: #7189000F;
+    border-radius: 50px;
+    font-size: 16px;
+    line-height: 1.5;
+    min-width: 60px;
+    text-align: center;
+    color: #718900;
+}
+.employee-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.employee-buttons .view-profile-btn {
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    display: inline-block;
+    flex: 1;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #E7C164;
+    border-radius: 8px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border: none;
+    transition: all 200ms;
+}
+.employee-buttons .view-profile-btn:hover {
+    background-color: #b5923f;
+}
+.employee-buttons .message-btn {
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #FFFFFF;
+    border: 1px solid #00000021;
+    background-color: #718900;
+    padding: 12px 36px;
+    border-radius: 8px;
+    flex: 0 0 auto;
+}
+.employee-buttons .message-btn:hover {
+    background-color: #506101;
+}
+.filter-results-content .load-more {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.filter-results-content .load-more .load-more-btn {
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #E7C164;
+    border: none;
+    padding: 18px 40px;
+    border-radius: 16px;
+    transition: all 200ms;
+}
+.filter-results-content .load-more .load-more-btn:hover {
+    background-color: #b18e38;
+}
+
 /* Form Results Style */
 
 @media screen and (max-width: 1499px) {
@@ -276,7 +435,12 @@ body {
     /* Form Style */
 
     /* Form Results Style */
-
+    .employee-title h3 {
+        font-size: 20px;
+    }
+    .employee-buttons .view-profile-btn {
+        font-size: 16px;
+    }
     /* Form Results Style */
 }
 @media screen and (max-width: 1199px) {
@@ -301,7 +465,9 @@ body {
     /* Form Style */
 
     /* Form Results Style */
-
+    .filter-results-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
     /* Form Results Style */
 }
 @media screen and (max-width: 991px) {
@@ -329,8 +495,40 @@ body {
         padding: 16px 40px;
     }
     /* Form Style */
-    
-    /* Form Results Style */
 
+    /* Form Results Style */
+    .employee-card-header {
+        padding: 15px 16px;
+    }
+    .employee-card-footer {
+        padding: 15px 16px;
+    }
+    .employee-bio {
+        gap: 12px;
+    }
+    .employee-img img {
+        width: 48px;
+        height: 48px;
+    }
+    .employee-title h3 {
+        font-size: 18px;
+    }
+    .employee-title h6 {
+        font-size: 14px;
+    }
+    .employee-buttons .message-btn {
+        padding: 12px 28px;
+    }
+    .filter-results-content .load-more .load-more-btn {
+        font-size: 16px;
+        padding: 16px 36px;
+    }
+    /* Form Results Style */
+}
+@media screen and (max-width: 767px) {
+    /* Form Results Style */
+    .filter-results-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
     /* Form Results Style */
 }
